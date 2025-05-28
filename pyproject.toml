@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "py_ECEF"
+version = "0.1"
+description = 'Library to convert between geodetic and geocentric coordinates (LLA <-> ECEF)'
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "LeahighBM", email = "bleahighmc@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/LeahighBM/py_ECEF#readme"
+Issues = "https://github.com/LeahighBM/py_ECEF/issues"
+Source = "https://github.com/LeahighBM/py_ECEF"
+
