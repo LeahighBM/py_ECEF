@@ -39,14 +39,14 @@ def LLA_to_ECEF(lat: float, lon: float, alt: float) -> Tuple[float, float, float
     lat_rad = (lat * pi) / 180.0
     lon_rad = (lon * pi) / 180.0
 
-    chi = sqrt(1e-2 * sin(lat_rad) * sin(lat_rad))
+    chi = sqrt(1-E2 * sin(lat_rad) * sin(lat_rad))
 
     # prime vertical radius of curvature 
     prime_vert = SMA/chi
 
     x = ((prime_vert + alt) * cos(lat_rad) * cos(lon_rad))
     y = ((prime_vert + alt) * cos(lat_rad) * sin(lon_rad))
-    z = (SMA * (1.0e-2) / chi + alt) * sin(lat_rad)
+    z = (SMA * (1.0-E2) / chi + alt) * sin(lat_rad)
 
     return x, y, z
 
@@ -67,7 +67,7 @@ def ECEF_to_LLA(x: float, y: float, z: float) -> Tuple[float, float, float]:
     Returns:
     Tuple[float, float, float]
         Tuple where values are Lat, Long, and alt respectively.
-        Lat and Long are in degrees, altitude is in degrees.
+        Lat and Long are in degrees, altitude is in meters.
     """
     x_y_sq = sqrt(x ** 2 + y ** 2)
     theta  = atan(z * SMA / (x_y_sq * VOL_RAD))
@@ -81,7 +81,7 @@ def ECEF_to_LLA(x: float, y: float, z: float) -> Tuple[float, float, float]:
     lat = atan(lat_numerator / lat_denominator)
     lon = atan2(y, x)
     
-    num = SMA / sqrt(1e-2 * sin(lat) ** 2)
+    num = SMA / sqrt(1-E2 * sin(lat) ** 2)
     alt = x_y_sq / cos(lat) - num
 
     # Radians to degrees
